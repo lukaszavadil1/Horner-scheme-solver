@@ -1,7 +1,3 @@
-# Horner scheme solver
-# created by Lukas Zavadil 1BIT 2021/2022
-
-
 class App:
     def __init__(self):
         self.poly_degree = 0
