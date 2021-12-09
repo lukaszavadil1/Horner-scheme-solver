@@ -44,12 +44,15 @@ class App:
         self.poly_degree = len(polynom)
         print("(", end="")
         for i in range(self.poly_degree):
-            if i == self.poly_degree - 1:
-                self.is_last = True
-            if self.is_last:
-                print("{coef})\n".format(coef=polynom[i]))
-            else:
-                print("{coef}x^{poly_index} ".format(coef=polynom[i], poly_index=self.poly_degree - i - 1), end="")
+            if polynom[i] != 0:
+                if i == self.poly_degree - 1:
+                    self.is_last = True
+                if self.is_last:
+                    print("{coef})\n".format(coef=polynom[i]))
+                elif i == self.poly_degree - 2:
+                    print("{coef}x ".format(coef=polynom[i]), end="")
+                else:
+                    print("{coef}x^{poly_index} ".format(coef=polynom[i], poly_index=self.poly_degree - i - 1), end="")
         self.is_last = False
 
     def apply_scheme(self, polynom):
@@ -77,17 +80,17 @@ class App:
                     self.apply_scheme(self.new_polynom)
                     self.has_solution = False
         if not self.has_solution:
-            print("Dale jiz nelze vyraz upravit.\nVysledek:")
+            print("Dale jiz nelze vyraz upravit.")
             self.result += "("
             for i in range(len(self.new_polynom)):
-                if i == self.poly_degree - 1:
-                    self.is_last = True
-                if self.is_last:
-                    self.result += str(self.new_polynom[i]) + ")"
-                else:
-                    self.result += str(self.new_polynom[i]) + "x^{index} ".format(index=len(self.new_polynom) - i - 1)
+                if polynom[i] != 0:
+                    if i == self.poly_degree - 1:
+                        self.is_last = True
+                    if self.is_last:
+                        self.result += str(self.new_polynom[i]) + ")"
+                    else:
+                        self.result += str(self.new_polynom[i]) + "x^{index} ".format(index=len(self.new_polynom) - i - 1)
             self.is_last = False
-            print(self.result)
             exit(0)
 
 
